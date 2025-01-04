@@ -44,7 +44,7 @@ export function SubmitFormButton({
         id={id}
         ref={ref}
         type="submit"
-        variant={variant ?? 'success'}
+        variant={variant ?? 'primary'}
         size={size || 'sm'}
         disabled={isSubmitting || disabled}
         className={className}

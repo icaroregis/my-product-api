@@ -26,9 +26,9 @@ export function Modal({
         disableCloseModal={disableCloseModal}
       />
       <div className="fixed transform -translate-x-1/2 -translate-y-1/2 z-[100] top-1/2 left-1/2">
-        <div className="relative w-full rounded-xl shadow-md bg-interlis-cards-100">
-          <div className="flex items-center justify-between p-4 bg-interlis-tags-100 rounded-t-xl">
-            <h3 className="text-base font-bold leading-5 text-interlis-fonts-300">{title}</h3>
+        <div className="relative w-full rounded-xl shadow-md bg-white">
+          <div className="flex items-center justify-between p-4 bg-white rounded-t-xl">
+            <h3 className="text-base font-bold leading-5 text-black">{title}</h3>
             {iconCloseModal && (
               <CloseModalButton
                 clearParam={clearParam}

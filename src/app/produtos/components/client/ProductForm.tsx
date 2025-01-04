@@ -3,6 +3,7 @@
 import { CancelFormButton } from '@/components/Buttons/CancelFormButton';
 import { SubmitFormButton } from '@/components/Buttons/SubmitFormButton';
 import { sleep } from '@/utils/sleep';
+import { usePathname, useRouter } from 'next/navigation';
 import { BaseSyntheticEvent, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { CreateProductFormData, UpdateProductFormData } from '../../specifications/product.schema';
@@ -20,8 +21,8 @@ type ProductFormPropsUpdate = {
 type IProductFormProps = ProductFormPropsCreate | ProductFormPropsUpdate;
 
 export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFormProps>) {
-  // const pathname = usePathname();
-  // const { push } = useRouter();
+  const pathname = usePathname();
+  const { push } = useRouter();
   const [createAnother, setCreateAnother] = useState(false);
 
   const {
@@ -33,6 +34,10 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
     // control,
     formState: { isSubmitting },
   } = useFormContext<CreateProductFormData | UpdateProductFormData>();
+
+  const leaveProductForm = () => {
+    push(pathname);
+  };
 
   async function handleSubmitFormData(
     data: CreateProductFormData | UpdateProductFormData,
@@ -66,7 +71,7 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
       <div className="flex justify-end items-center gap-4 mt-10 mb-2">
         <CancelFormButton
           title="Fechar"
-          handleCancel={() => {}}
+          handleCancel={leaveProductForm}
           disabled={isSubmitting}
         />
 

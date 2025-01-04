@@ -17,7 +17,7 @@ type CancelFormButtonProps = {
   className?: string;
   size?: keyof typeof buttonVariant.variants.size;
   fontSize?: keyof typeof buttonTextVariant.variants.size;
-  variant?: 'cancel' | 'outline' | 'newSecondary';
+  variant?: 'delete';
 } & ComponentProps<'button'>;
 
 export function CancelFormButton({
@@ -27,7 +27,7 @@ export function CancelFormButton({
   type = 'button',
   disabled = false,
   id = 'cancel-form',
-  variant = 'cancel',
+  variant = 'delete',
   className,
   size,
   fontSize,

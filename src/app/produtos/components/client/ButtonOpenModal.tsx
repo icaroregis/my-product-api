@@ -18,11 +18,12 @@ export const ButtonOpenModal = () => {
     <div>
       <button
         onClick={handleCreateTagModal}
-        className="flex justify-center items-center p-[8px] bg-interlis-buttons-800 rounded-[6px]">
+        className="flex justify-center items-center p-[8px] bg-green-700 rounded-[6px] gap-2 text-white">
         <FontAwesomeIcon
           icon={faPlus}
           style={{ width: '24px', height: '24px', color: '#fff' }}
         />
+        Cadastrar Novo Produto
       </button>
     </div>
   );
