@@ -35,7 +35,8 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
     control,
     formState: { isSubmitting },
   } = useFormContext<CreateProductFormData | UpdateProductFormData>();
-  console.log('🚀 ~ ProductForm ~ watch:', watch);
+  const values = watch();
+  console.log('🚀 ~ ProductForm ~ values:', values);
 
   const leaveProductForm = () => {
     push(pathname);

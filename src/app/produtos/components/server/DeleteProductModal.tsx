@@ -15,7 +15,7 @@ export const DeleteProductModal = async ({ id }: ProductProps) => {
   return (
     <Modal
       title="Desativar Produto"
-      clearParam="deleteTagModal"
+      clearParam="deleteProductModal"
       className="w-[432px]">
       <DeleteProductForm
         id={id}

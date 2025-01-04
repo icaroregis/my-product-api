@@ -1,13 +1,12 @@
 import { z } from 'zod';
 
 const required = 'Item Obrigatório';
-const limit = 'Excedeu o número máximo de caracteres';
 
 const ProductSchema = z.object({
   id: z.string(),
-  nome: z.string({ required_error: required }).min(1, required).max(128, limit),
-  preco: z.string(),
-  quantidade: z.string(),
+  nome: z.string({ required_error: required }),
+  preco: z.string({ required_error: required }),
+  quantidade: z.string({ required_error: required }),
 });
 
 export const CreateTagSchema = ProductSchema.omit({

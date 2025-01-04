@@ -15,7 +15,7 @@ export async function UpdateProductModal({ id }: Readonly<ProductProps>) {
   return (
     <Modal
       title="Editar Tag"
-      clearParam="updateTagModal"
+      clearParam="updateProductModal"
       className="w-[432px]">
       <UpdateProductForm
         id={id}
