@@ -58,7 +58,7 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
       <div className="flex flex-col mb-4">
         <label htmlFor="">Nome</label>
         <input
-          {...register('name')}
+          {...register('nome')}
           required
         />
       </div>

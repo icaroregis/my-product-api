@@ -5,8 +5,9 @@ const limit = 'Excedeu o número máximo de caracteres';
 
 const ProductSchema = z.object({
   id: z.string(),
-  name: z.string({ required_error: required }).min(1, required).max(128, limit),
-  color: z.string(),
+  nome: z.string({ required_error: required }).min(1, required).max(128, limit),
+  preco: z.string(),
+  quantidade: z.string(),
 });
 
 export const CreateTagSchema = ProductSchema.omit({

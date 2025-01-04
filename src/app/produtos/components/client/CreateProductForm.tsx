@@ -11,7 +11,9 @@ export function CreateProductForm() {
   const methods = useForm<CreateProductFormData>({
     resolver: zodResolver(CreateTagSchema),
     defaultValues: {
-      color: '#6366F1',
+      nome: '',
+      preco: '',
+      quantidade: '',
     },
   });
 

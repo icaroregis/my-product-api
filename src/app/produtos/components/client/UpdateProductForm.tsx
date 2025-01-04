@@ -19,7 +19,6 @@ export function UpdateProductForm({ id, nome, preco, quantidade }: Readonly<Upda
   // const { push } = useRouter();
   // const pathname = usePathname();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const methods = useForm<UpdateProductFormData>({}) as any;
 
   // const methods = useForm<UpdateProductFormData>({
@@ -36,8 +35,9 @@ export function UpdateProductForm({ id, nome, preco, quantidade }: Readonly<Upda
     // const toastId = toast.loading('Enviando...');
 
     const body = {
-      name: data.name,
-      color: data.color,
+      nome: data.nome,
+      preco: data.preco,
+      quantidade: data.quantidade,
     };
     console.log(body);
 
