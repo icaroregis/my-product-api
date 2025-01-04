@@ -1,0 +1,82 @@
+'use client';
+
+import { sleep } from '@/utils/sleep';
+import { usePathname, useRouter } from 'next/navigation';
+import { BaseSyntheticEvent, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { CreateProductFormData, UpdateProductFormData } from '../../specifications/product.schema';
+
+type ProductFormPropsCreate = {
+  handleSubmitFunction: (data: CreateProductFormData, createAnother: boolean, reset: () => void) => Promise<void>;
+  type: 'create';
+};
+
+type ProductFormPropsUpdate = {
+  handleSubmitFunction: (data: UpdateProductFormData) => Promise<void>;
+  type: 'update';
+};
+
+type IProductFormProps = ProductFormPropsCreate | ProductFormPropsUpdate;
+
+export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFormProps>) {
+  const pathname = usePathname();
+  const { push } = useRouter();
+  const [createAnother, setCreateAnother] = useState(false);
+
+  const {
+    watch,
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    control,
+    formState: { isSubmitting, errors },
+  } = useFormContext<CreateProductFormData | UpdateProductFormData>();
+
+  async function handleSubmitFormData(
+    data: CreateProductFormData | UpdateProductFormData,
+    e?: BaseSyntheticEvent<object, unknown, unknown>,
+  ) {
+    e?.preventDefault();
+
+    if (type === 'create') {
+      await handleSubmitFunction(data as CreateProductFormData, createAnother, reset);
+    }
+
+    if (type === 'update') {
+      await handleSubmitFunction(data as UpdateProductFormData);
+    }
+
+    await sleep();
+  }
+
+  return (
+    <form
+      id="tag-form"
+      onSubmit={handleSubmit(handleSubmitFormData)}>
+      <div className="flex flex-col mb-4">
+        <label htmlFor="">Nome</label>
+        <input
+          {...register('name')}
+          required
+        />
+      </div>
+
+      <div className="flex justify-end items-center gap-4 mt-10 mb-2">
+        <CancelFormButton
+          title="Fechar"
+          handleCancel={leaveTagForm}
+          disabled={isSubmitting}
+        />
+
+        <SubmitFormButton
+          handleClick={setCreateAnother}
+          classNameMain={type === 'create' ? 'flex gap-[1.5px]' : undefined}
+          variant={type === 'create' ? 'successWithMore' : undefined}
+          isSubmitting={isSubmitting}
+          addButton={type === 'create'}
+        />
+      </div>
+    </form>
+  );
+}
