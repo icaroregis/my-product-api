@@ -11,7 +11,6 @@ type SectorTableProps = {
 };
 
 export function ProductTable({ data }: Readonly<SectorTableProps>) {
-  console.log('🚀 ~ ProductTable ~ data:', data);
   const pathname = usePathname();
   const { push } = useRouter();
 

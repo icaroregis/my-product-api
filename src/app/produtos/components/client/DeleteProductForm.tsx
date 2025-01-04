@@ -60,7 +60,7 @@ export function DeleteProductForm({ id, name }: Readonly<DeleteProductFormProps>
         <CancelFormButton handleCancel={handleCloseModal} />
         <SubmitFormButton
           isSubmitting={isSubmitting}
-          variant="warning"
+          variant="primary"
           title="Desativar"
         />
       </div>

@@ -19,8 +19,7 @@ export const buttonVariant = tv({
     },
     variant: {
       newPrimary: 'bg-interlis-buttons-800',
-      primary:
-        'bg-green-500 hover:bg-green-600 active:bg-indigo-900 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:active:bg-indigo-700',
+      primary: 'bg-green-500 hover:bg-green-600',
       newSecondary: 'bg-transparent hover:bg-gray-100 active:bg-gray-200 border border-indigo-100 text-indigo-700',
       outline: 'bg-transparent hover:bg-gray-100 active:bg-gray-200 border border-gray-300 text-gray-500',
       successWithMore: 'rounded-l-md rounded-r-none bg-green-500 hover:bg-green-600',
