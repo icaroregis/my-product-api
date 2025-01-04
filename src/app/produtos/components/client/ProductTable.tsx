@@ -1,5 +1,9 @@
 'use client';
 
+import { usePathname, useRouter } from 'next/navigation';
+import { Button } from 'primereact/button';
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
 import { Product } from '../../interfaces/product';
 
 type SectorTableProps = {
@@ -8,19 +12,59 @@ type SectorTableProps = {
 
 export function ProductTable({ data }: Readonly<SectorTableProps>) {
   console.log('🚀 ~ ProductTable ~ data:', data);
-  // const pathname = usePathname();
-  // const { push } = useRouter();
+  const pathname = usePathname();
+  const { push } = useRouter();
 
-  // function handleRowClick(original: Tag) {
-  //   const queryParams = new URLSearchParams(window.location.search);
-  //   queryParams.set('updateTagModal', 'true');
-  //   queryParams.set('updateTagId', original.id);
-  //   push(`${pathname}?${queryParams.toString()}`);
-  // }
+  const actionBodyTemplate = (rowData: Product) => {
+    return (
+      <div className="flex justify-content-center">
+        <Button
+          icon="pi pi-pencil"
+          className="p-button-rounded p-button-text p-button-info"
+          onClick={() => onEdit(rowData)}
+        />
+        <Button
+          icon="pi pi-trash"
+          className="p-button-rounded p-button-text p-button-danger"
+          onClick={() => onDelete(rowData)}
+        />
+      </div>
+    );
+  };
+
+  const onEdit = (product: Product) => {
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.set('updateProductModal', 'true');
+    queryParams.set('updateProductId', String(product.id));
+    push(`${pathname}?${queryParams.toString()}`);
+  };
+
+  const onDelete = (product: Product) => {
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.set('deleteProductModal', 'true');
+    queryParams.set('deleteProductId', String(product.id));
+    push(`${pathname}?${queryParams.toString()}`);
+  };
 
   return (
     <div>
-      <h1>Aqui será renderizado a tabela</h1>
+      <DataTable value={data}>
+        <Column
+          field="id"
+          header="ID"></Column>
+        <Column
+          field="nome"
+          header="Nome"></Column>
+        <Column
+          field="preco"
+          header="Preço"></Column>
+        <Column
+          field="quantidade"
+          header="Quantidade"></Column>
+        <Column
+          body={actionBodyTemplate}
+          header="Ações"></Column>
+      </DataTable>
     </div>
   );
 }
