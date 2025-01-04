@@ -2,16 +2,11 @@
 
 import { CancelFormButton } from '@/components/Buttons/CancelFormButton';
 import { SubmitFormButton } from '@/components/Buttons/SubmitFormButton';
-import { useAuth } from '@/shared/context/AuthContextP';
-import { useTenant } from '@/shared/context/TenantContext';
 import { sleep } from '@/utils/sleep';
-import { updateErrorToast, updateSuccessToast } from '@/utils/toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { DeleteProductFormData, DeleteProductSchema } from '../../specifications/product.schema';
-import { deleteTagAction } from '../../specifications/tag.actions';
 
 type DeleteProductFormProps = {
   id: string;
@@ -19,8 +14,6 @@ type DeleteProductFormProps = {
 };
 
 export function DeleteProductForm({ id, name }: Readonly<DeleteProductFormProps>) {
-  const { tenant } = useTenant();
-  const { session } = useAuth();
   const { push } = useRouter();
   const pathname = usePathname();
 
@@ -39,15 +32,16 @@ export function DeleteProductForm({ id, name }: Readonly<DeleteProductFormProps>
   };
 
   async function handleDeleteTag(data: DeleteProductFormData) {
-    const toastId = toast.loading('Desativando...');
-    const response = await deleteTagAction(tenant, session?.user!, data.id);
+    // const toastId = toast.loading('Desativando...');
+    // const response = await deleteTagAction(tenant, session?.user!, data.id);
+    console.log(data);
 
-    if (response.ok) {
-      updateSuccessToast(toastId, response.message);
-      push(pathname);
-    } else {
-      updateErrorToast(toastId, response.message);
-    }
+    // if (response.ok) {
+    //   updateSuccessToast(toastId, response.message);
+    //   push(pathname);
+    // } else {
+    //   updateErrorToast(toastId, response.message);
+    // }
 
     await sleep();
   }

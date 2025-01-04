@@ -1,5 +1,5 @@
 import { Modal } from '@/components/Modal';
-import { CreateTaForm } from '../client/CreateProductForm';
+import { CreateProductForm } from '../client/CreateProductForm';
 
 export const CreateProductModal = () => {
   return (
@@ -7,7 +7,7 @@ export const CreateProductModal = () => {
       title="Cadastrar Produto"
       clearParam="createProductModal"
       className="w-[432px]">
-      <CreateTaForm />
+      <CreateProductForm />
     </Modal>
   );
 };

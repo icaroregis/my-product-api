@@ -10,7 +10,7 @@ export const ButtonOpenModal = () => {
 
   function handleCreateTagModal() {
     const params = new URLSearchParams();
-    params.set('createTagModal', 'true');
+    params.set('createProductModal', 'true');
     push(`${pathname}?${params.toString()}`);
   }
 

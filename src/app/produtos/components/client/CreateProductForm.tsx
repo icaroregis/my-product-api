@@ -1,21 +1,13 @@
 'use client';
 
-import { useAuth } from '@/shared/context/AuthContextP';
-import { useTenant } from '@/shared/context/TenantContext';
-import { updateErrorToast, updateSuccessToast } from '@/utils/toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { usePathname, useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { CreateProductFormData, CreateTagSchema } from '../../specifications/product.schema';
-import { createTagAction } from '../../specifications/tag.actions';
 import { ProductForm } from './ProductForm';
 
 export function CreateProductForm() {
-  const { tenant } = useTenant();
-  const { session } = useAuth();
-  const { push } = useRouter();
-  const pathname = usePathname();
+  // const { push } = useRouter();
+  // const pathname = usePathname();
   const methods = useForm<CreateProductFormData>({
     resolver: zodResolver(CreateTagSchema),
     defaultValues: {
@@ -24,24 +16,28 @@ export function CreateProductForm() {
   });
 
   async function handleSubmitFunction(data: CreateProductFormData, createAnother: boolean, reset: () => void) {
-    const toastId = toast.loading('Enviando...');
+    // const toastId = toast.loading('Enviando...');
+    console.log(createAnother);
+    console.log(reset);
 
     const body = {
       ...data,
     };
 
-    const response = await createTagAction(tenant, session?.user!, body);
+    console.log(body);
 
-    if (response.ok) {
-      updateSuccessToast(toastId, response.message);
-      if (!createAnother) {
-        push(pathname);
-      } else {
-        reset();
-      }
-    } else {
-      updateErrorToast(toastId, response.message);
-    }
+    // const response = await createTagAction(tenant, session?.user!, body);
+
+    // if (response.ok) {
+    //   updateSuccessToast(toastId, response.message);
+    //   if (!createAnother) {
+    //     push(pathname);
+    //   } else {
+    //     reset();
+    //   }
+    // } else {
+    //   updateErrorToast(toastId, response.message);
+    // }
   }
 
   return (

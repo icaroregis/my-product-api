@@ -1,53 +1,54 @@
 'use client';
 
-import { useAuth } from '@/shared/context/AuthContextP';
-import { useTenant } from '@/shared/context/TenantContext';
-import { updateErrorToast, updateSuccessToast } from '@/utils/toast';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { usePathname, useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { UpdateProductFormData, UpdateProductSchema } from '../../specifications/product.schema';
-import { updateTagAction } from '../../specifications/tag.actions';
+import { UpdateProductFormData } from '../../specifications/product.schema';
 import { ProductForm } from './ProductForm';
 
 type UpdateProductFormProps = {
   id: string;
-  name: string;
-  color: string;
+  nome: string;
+  preco: string;
+  quantidade: string;
 };
 
-export function UpdateProductForm({ id, name, color }: Readonly<UpdateProductFormProps>) {
-  const { tenant } = useTenant();
-  const { session } = useAuth();
-  const { push } = useRouter();
-  const pathname = usePathname();
+export function UpdateProductForm({ id, nome, preco, quantidade }: Readonly<UpdateProductFormProps>) {
+  console.log('🚀 ~ UpdateProductForm ~ quantidade:', quantidade);
+  console.log('🚀 ~ UpdateProductForm ~ preco:', preco);
+  console.log('🚀 ~ UpdateProductForm ~ nome:', nome);
+  console.log('🚀 ~ UpdateProductForm ~ id:', id);
+  // const { push } = useRouter();
+  // const pathname = usePathname();
 
-  const methods = useForm<UpdateProductFormData>({
-    resolver: zodResolver(UpdateProductSchema),
-    defaultValues: {
-      id,
-      name,
-      color,
-    },
-  });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const methods = useForm<UpdateProductFormData>({}) as any;
+
+  // const methods = useForm<UpdateProductFormData>({
+  //   resolver: zodResolver(UpdateProductSchema),
+  //   defaultValues: {
+  //     id,
+  //     nome,
+  //     preco,
+  //     quantidade,
+  //   },
+  // });
 
   async function handleSubmitFunction(data: UpdateProductFormData) {
-    const toastId = toast.loading('Enviando...');
+    // const toastId = toast.loading('Enviando...');
 
     const body = {
       name: data.name,
       color: data.color,
     };
+    console.log(body);
 
-    const response = await updateTagAction(tenant, session?.user!, id, body);
+    // const response = await updateTagAction(tenant, session?.user!, id, body);
 
-    if (response.ok) {
-      updateSuccessToast(toastId, response.message);
-      push(pathname);
-    } else {
-      updateErrorToast(toastId, response.message);
-    }
+    // if (response.ok) {
+    //   updateSuccessToast(toastId, response.message);
+    //   push(pathname);
+    // } else {
+    //   updateErrorToast(toastId, response.message);
+    // }
   }
 
   return (
