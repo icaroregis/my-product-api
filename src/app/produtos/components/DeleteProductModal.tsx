@@ -1,5 +1,5 @@
 import { Modal } from '@/components/Modal';
-import { DeleteProductForm } from '../client/DeleteProductForm';
+import { DeleteProductForm } from './DeleteProductForm';
 
 type ProductProps = {
   id: string;

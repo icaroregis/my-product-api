@@ -1,5 +1,5 @@
 import { Modal } from '@/components/Modal';
-import { UpdateProductForm } from '../client/UpdateProductForm';
+import { UpdateProductForm } from './UpdateProductForm';
 
 type ProductProps = {
   id: string;

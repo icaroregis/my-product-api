@@ -7,7 +7,7 @@ import { sleep } from '@/utils/sleep';
 import { usePathname, useRouter } from 'next/navigation';
 import { BaseSyntheticEvent, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { CreateProductFormData, UpdateProductFormData } from '../../specifications/product.schema';
+import { CreateProductFormData, UpdateProductFormData } from '../specifications/product.schema';
 
 type ProductFormPropsCreate = {
   handleSubmitFunction: (data: CreateProductFormData, createAnother: boolean, reset: () => void) => Promise<void>;

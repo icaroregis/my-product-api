@@ -1,5 +1,5 @@
 import { Modal } from '@/components/Modal';
-import { CreateProductForm } from '../client/CreateProductForm';
+import { CreateProductForm } from './CreateProductForm';
 
 export const CreateProductModal = () => {
   return (

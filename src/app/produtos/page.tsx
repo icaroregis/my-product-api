@@ -1,8 +1,8 @@
-import { ButtonOpenModal } from './components/client/ButtonOpenModal';
-import { CreateProductModal } from './components/server/CreateProductModal';
-import { DeleteProductModal } from './components/server/DeleteProductModal';
-import { ListProducts } from './components/server/ListProducts';
-import { UpdateProductModal } from './components/server/UpdateProductModal';
+import { ButtonOpenModal } from './components/ButtonOpenModal';
+import { CreateProductModal } from './components/CreateProductModal';
+import { DeleteProductModal } from './components/DeleteProductModal';
+import { ProductTable } from './components/ProductTable';
+import { UpdateProductModal } from './components/UpdateProductModal';
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -22,7 +22,7 @@ export default function Page({ searchParams }: Readonly<Props>) {
           <ButtonOpenModal />
         </div>
 
-        <ListProducts />
+        <ProductTable />
       </div>
 
       {createProductModal && <CreateProductModal />}

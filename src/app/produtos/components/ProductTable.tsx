@@ -1,18 +1,24 @@
 'use client';
 
+import { useGetProducts } from '@/server/productsApi';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import { Product } from '../../interfaces/product';
+import { Product } from '../interfaces/product';
 
-type SectorTableProps = {
-  data: Product[];
-};
-
-export function ProductTable({ data }: Readonly<SectorTableProps>) {
+export function ProductTable() {
+  const { data, isLoading, error } = useGetProducts();
   const pathname = usePathname();
   const { push } = useRouter();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const actionBodyTemplate = (rowData: Product) => {
     return (
@@ -47,7 +53,7 @@ export function ProductTable({ data }: Readonly<SectorTableProps>) {
 
   return (
     <div>
-      <DataTable value={data}>
+      <DataTable value={data || []}>
         <Column
           field="id"
           header="ID"></Column>

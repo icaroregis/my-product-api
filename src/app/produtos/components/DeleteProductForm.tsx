@@ -1,10 +1,11 @@
+'use client';
+
 import { CancelFormButton } from '@/components/Buttons/CancelFormButton';
 import { SubmitFormButton } from '@/components/Buttons/SubmitFormButton';
-import { sleep } from '@/utils/sleep';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { DeleteProductFormData, DeleteProductSchema } from '../../specifications/product.schema';
+import { DeleteProductFormData, DeleteProductSchema } from '../specifications/product.schema';
 
 type DeleteProductFormProps = {
   id: string;
@@ -31,8 +32,6 @@ export function DeleteProductForm({ id, name }: Readonly<DeleteProductFormProps>
 
   async function handleDeleteTag(data: DeleteProductFormData) {
     console.log(data);
-
-    await sleep();
   }
 
   return (
