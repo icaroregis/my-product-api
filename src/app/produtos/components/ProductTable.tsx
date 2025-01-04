@@ -20,6 +20,14 @@ export function ProductTable() {
     return <div>Error: {error.message}</div>;
   }
 
+  const priceBodyTemplate = (rowData: Product) => {
+    const convertedNumber = Number(rowData.preco);
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(convertedNumber);
+  };
+
   const actionBodyTemplate = (rowData: Product) => {
     return (
       <div className="flex justify-content-center">
@@ -53,7 +61,7 @@ export function ProductTable() {
 
   return (
     <div>
-      <DataTable value={data || []}>
+      <DataTable value={data}>
         <Column
           field="id"
           header="ID"></Column>
@@ -62,7 +70,8 @@ export function ProductTable() {
           header="Nome"></Column>
         <Column
           field="preco"
-          header="Preço"></Column>
+          header="Preço"
+          body={priceBodyTemplate}></Column>
         <Column
           field="quantidade"
           header="Quantidade"></Column>
