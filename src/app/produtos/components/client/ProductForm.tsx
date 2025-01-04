@@ -2,6 +2,7 @@
 
 import { CancelFormButton } from '@/components/Buttons/CancelFormButton';
 import { SubmitFormButton } from '@/components/Buttons/SubmitFormButton';
+import { InputField } from '@/components/Inputs/InputField';
 import { sleep } from '@/utils/sleep';
 import { usePathname, useRouter } from 'next/navigation';
 import { BaseSyntheticEvent, useState } from 'react';
@@ -26,14 +27,15 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
   const [createAnother, setCreateAnother] = useState(false);
 
   const {
-    // watch,
+    watch,
     register,
     handleSubmit,
     // setValue,
     reset,
-    // control,
+    control,
     formState: { isSubmitting },
   } = useFormContext<CreateProductFormData | UpdateProductFormData>();
+  console.log('🚀 ~ ProductForm ~ watch:', watch);
 
   const leaveProductForm = () => {
     push(pathname);
@@ -61,9 +63,29 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
       id="tag-form"
       onSubmit={handleSubmit(handleSubmitFormData)}>
       <div className="flex flex-col mb-4">
-        <label htmlFor="">Nome</label>
-        <input
+        <InputField
+          label="Nome"
+          control={control}
           {...register('nome')}
+          required
+        />
+      </div>
+
+      <div className="flex flex-col mb-4">
+        <InputField
+          label="Preço"
+          control={control}
+          {...register('preco')}
+          required
+          formatForCurrency
+        />
+      </div>
+
+      <div className="flex flex-col mb-4">
+        <InputField
+          label="Quantidade"
+          control={control}
+          {...register('quantidade')}
           required
         />
       </div>
