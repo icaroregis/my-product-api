@@ -1,12 +1,18 @@
-// import { getInitialTagAction } from '../../specifications/tag.actions';
+'use client';
+
+import { useGetProducts } from '@/service/productApi';
 import { ProductTable } from '../client/ProductTable';
 
-export async function ListProducts() {
-  // const tags = await getInitialTagAction();
-  const dataTable = [
-    { id: 1, nome: 'Produto 1', preco: '10', quantidade: '10' },
-    { id: 1, nome: 'Produto 2', preco: '20', quantidade: '40' },
-  ];
+export function ListProducts() {
+  const { data: products, isLoading, error } = useGetProducts();
 
-  return <ProductTable data={dataTable} />;
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (error) {
+    return <div>Erro ao carregar produtos</div>;
+  }
+
+  return <ProductTable data={products || []} />;
 }
