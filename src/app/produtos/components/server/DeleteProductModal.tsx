@@ -6,12 +6,6 @@ type ProductProps = {
 };
 
 export const DeleteProductModal = async ({ id }: ProductProps) => {
-  // const tag = await getTagById(tenant.slug, id);
-
-  // if (!tag) {
-  //   notFound();
-  // }
-
   return (
     <Modal
       title="Desativar Produto"

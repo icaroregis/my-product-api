@@ -1,5 +1,3 @@
-'use client';
-
 import { CancelFormButton } from '@/components/Buttons/CancelFormButton';
 import { SubmitFormButton } from '@/components/Buttons/SubmitFormButton';
 import { sleep } from '@/utils/sleep';
@@ -32,16 +30,7 @@ export function DeleteProductForm({ id, name }: Readonly<DeleteProductFormProps>
   };
 
   async function handleDeleteTag(data: DeleteProductFormData) {
-    // const toastId = toast.loading('Desativando...');
-    // const response = await deleteTagAction(tenant, session?.user!, data.id);
     console.log(data);
-
-    // if (response.ok) {
-    //   updateSuccessToast(toastId, response.message);
-    //   push(pathname);
-    // } else {
-    //   updateErrorToast(toastId, response.message);
-    // }
 
     await sleep();
   }

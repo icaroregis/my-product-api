@@ -1,19 +1,24 @@
-'use client';
+// 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { Product } from '../app/produtos/interfaces/product';
+// import { useQuery } from '@tanstack/react-query';
+// import axios from 'axios';
+// import { Product } from '../app/produtos/interfaces/product';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3000',
-});
+// const api = axios.create({
+//   baseURL: 'http://localhost:3000',
+// });
 
-export const useGetProducts = () => {
-  return useQuery<Product[]>({
-    queryKey: ['products'],
-    queryFn: async () => {
-      const { data } = await api.get('/products');
-      return data;
-    },
-  });
-};
+// export const useGetProducts = () => {
+//   return useQuery<Product[]>({
+//     queryKey: ['products'],
+//     queryFn: async () => {
+//       const { data } = await api.get('/products');
+//       return data.map((product) => ({
+//         id: product.id,
+//         nome: product.nome,
+//         preco: product.preco,
+//         quantidade: product.quantidade,
+//       }));
+//     },
+//   });
+// };

@@ -6,23 +6,19 @@ type ProductProps = {
 };
 
 export async function UpdateProductModal({ id }: Readonly<ProductProps>) {
-  // const tag = await getTagById(tenant.slug, id);
-
-  // if (!tag) {
-  //   notFound();
-  // }
+  const initialData = {
+    id,
+    nome: '',
+    preco: '',
+    quantidade: '',
+  };
 
   return (
     <Modal
       title="Editar Tag"
       clearParam="updateProductModal"
       className="w-[432px]">
-      <UpdateProductForm
-        id={id}
-        nome={''}
-        preco={''}
-        quantidade={''}
-      />
+      <UpdateProductForm {...initialData} />
     </Modal>
   );
 }

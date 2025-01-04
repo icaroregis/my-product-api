@@ -1,5 +1,3 @@
-'use client';
-
 import { FormProvider, useForm } from 'react-hook-form';
 import { UpdateProductFormData } from '../../specifications/product.schema';
 import { ProductForm } from './ProductForm';

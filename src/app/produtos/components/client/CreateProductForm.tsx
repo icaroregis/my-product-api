@@ -18,7 +18,6 @@ export function CreateProductForm() {
   });
 
   async function handleSubmitFunction(data: CreateProductFormData, createAnother: boolean, reset: () => void) {
-    // const toastId = toast.loading('Enviando...');
     console.log(createAnother);
     console.log(reset);
 
@@ -27,19 +26,6 @@ export function CreateProductForm() {
     };
 
     console.log(body);
-
-    // const response = await createTagAction(tenant, session?.user!, body);
-
-    // if (response.ok) {
-    //   updateSuccessToast(toastId, response.message);
-    //   if (!createAnother) {
-    //     push(pathname);
-    //   } else {
-    //     reset();
-    //   }
-    // } else {
-    //   updateErrorToast(toastId, response.message);
-    // }
   }
 
   return (
