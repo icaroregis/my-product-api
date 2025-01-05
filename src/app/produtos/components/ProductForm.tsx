@@ -2,7 +2,7 @@
 
 import { CancelFormButton } from '@/components/Buttons/CancelFormButton';
 import { SubmitFormButton } from '@/components/Buttons/SubmitFormButton';
-import { InputField } from '@/components/Inputs/InputField';
+import { PrimeInputField } from '@/components/Inputs/PrimeInputField';
 import { sleep } from '@/utils/sleep';
 import { usePathname, useRouter } from 'next/navigation';
 import { BaseSyntheticEvent, useState } from 'react';
@@ -68,19 +68,19 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
       onSubmit={handleSubmit(handleSubmitFormData)}>
       {type === 'update' && (
         <div className="hidden">
-          <InputField
+          <PrimeInputField
             label="ID"
             control={control}
             {...register('id')}
             required
-            readOnly
           />
         </div>
       )}
 
       <div className="flex flex-col mb-4">
-        <InputField
+        <PrimeInputField
           label="Nome"
+          name="nome"
           control={control}
           {...register('nome')}
           required
@@ -88,7 +88,7 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
       </div>
 
       <div className="flex flex-col mb-4">
-        <InputField
+        <PrimeInputField
           label="Preço"
           control={control}
           {...register('preco')}
@@ -98,8 +98,9 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
       </div>
 
       <div className="flex flex-col mb-4">
-        <InputField
+        <PrimeInputField
           label="Quantidade"
+          name="quantidade"
           control={control}
           {...register('quantidade')}
           required
