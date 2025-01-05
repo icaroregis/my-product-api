@@ -1,7 +1,8 @@
-export function formatarValor(valor: string) {
-  const valorSemMascara = valor.replace(/[^\d,]/g, '');
-  const valorNumerico = parseFloat(valorSemMascara.replace(',', '.'));
-  return Math.round(valorNumerico * 100) / 100;
+export function formatarValor(valor: string): string {
+  const valorSemMoeda = valor.replace(/R\$\s*/g, '');
+  const valorSemMascara = valorSemMoeda.replace(/[^\d,]/g, '');
+  const valorComPonto = valorSemMascara.replace(',', '.');
+  return Number(valorComPonto).toFixed(2);
 }
 
 export function formatarValorUpdate(valor: string) {

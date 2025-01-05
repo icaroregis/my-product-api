@@ -27,16 +27,12 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
   const [createAnother, setCreateAnother] = useState(false);
 
   const {
-    watch,
     register,
     handleSubmit,
-    // setValue,
     reset,
     control,
     formState: { isSubmitting },
   } = useFormContext<CreateProductFormData | UpdateProductFormData>();
-  const values = watch();
-  console.log('🚀 ~ ProductForm ~ values:', values);
 
   const leaveProductForm = () => {
     push(pathname);
@@ -63,7 +59,19 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
     <form
       id="tag-form"
       onSubmit={handleSubmit(handleSubmitFormData)}>
-      <div className="flex flex-col mb-4">
+      {type === 'update' && (
+        <div className="hidden">
+          <InputField
+            label="ID"
+            control={control}
+            {...register('id')}
+            required
+            readOnly
+          />
+        </div>
+      )}
+
+      <div className="flex flex-col mb-4 d-none">
         <InputField
           label="Nome"
           control={control}

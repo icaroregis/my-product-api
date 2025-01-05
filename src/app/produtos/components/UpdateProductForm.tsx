@@ -1,54 +1,59 @@
 'use client';
 
+import { useUpdateProduct } from '@/server/productsApi';
+import { formatCurrency } from '@/utils/formatCurrency';
+import { formatarValor } from '@/utils/formatValues';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { usePathname, useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import { UpdateProductFormData } from '../specifications/product.schema';
+import { toast } from 'react-toastify';
+import { Product } from '../interfaces/product';
+import { UpdateProductFormData, UpdateProductSchema } from '../specifications/product.schema';
 import { ProductForm } from './ProductForm';
 
 type UpdateProductFormProps = {
-  id: string;
-  nome: string;
-  preco: string;
-  quantidade: string;
+  data: Product;
 };
 
-export function UpdateProductForm({ id, nome, preco, quantidade }: Readonly<UpdateProductFormProps>) {
-  console.log('🚀 ~ UpdateProductForm ~ quantidade:', quantidade);
-  console.log('🚀 ~ UpdateProductForm ~ preco:', preco);
-  console.log('🚀 ~ UpdateProductForm ~ nome:', nome);
-  console.log('🚀 ~ UpdateProductForm ~ id:', id);
-  // const { push } = useRouter();
-  // const pathname = usePathname();
+export function UpdateProductForm({ data }: Readonly<UpdateProductFormProps>) {
+  const { push } = useRouter();
+  const pathname = usePathname();
 
-  const methods = useForm<UpdateProductFormData>({}) as any;
+  const methods = useForm<UpdateProductFormData>({
+    resolver: zodResolver(UpdateProductSchema),
+    defaultValues: {
+      id: String(data.id),
+      nome: data.nome,
+      preco: formatCurrency(data.preco, true),
+      quantidade: data.quantidade,
+    },
+  });
 
-  // const methods = useForm<UpdateProductFormData>({
-  //   resolver: zodResolver(UpdateProductSchema),
-  //   defaultValues: {
-  //     id,
-  //     nome,
-  //     preco,
-  //     quantidade,
-  //   },
-  // });
+  const updateProduct = useUpdateProduct();
 
   async function handleSubmitFunction(data: UpdateProductFormData) {
-    // const toastId = toast.loading('Enviando...');
+    try {
+      const newPrice = formatarValor(data.preco);
+      const response = await updateProduct.mutateAsync({
+        id: data.id,
+        data: {
+          nome: data.nome,
+          preco: newPrice,
+          quantidade: data.quantidade,
+        },
+      });
 
-    const body = {
-      nome: data.nome,
-      preco: data.preco,
-      quantidade: data.quantidade,
-    };
-    console.log(body);
+      console.log('🚀 ~ handleSubmitFunction ~ response:', response);
 
-    // const response = await updateTagAction(tenant, session?.user!, id, body);
-
-    // if (response.ok) {
-    //   updateSuccessToast(toastId, response.message);
-    //   push(pathname);
-    // } else {
-    //   updateErrorToast(toastId, response.message);
-    // }
+      if (response) {
+        toast.success('Produto atualizado com sucesso');
+        push(pathname);
+      } else {
+        toast.error('Erro ao atualizar produto');
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar produto:', error);
+    }
   }
 
   return (
