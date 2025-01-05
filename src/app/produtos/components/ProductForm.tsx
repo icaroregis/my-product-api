@@ -116,10 +116,10 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
         {type === 'create' ? (
           <SubmitFormButton
             handleClick={setCreateAnother}
-            classNameMain={type === 'create' ? 'flex gap-[1.5px]' : undefined}
-            variant={type === 'create' ? 'successWithMore' : 'primary'}
+            classNameMain={'flex gap-[1.5px]'}
+            variant={'successWithMore'}
             isSubmitting={isSubmitting}
-            addButton={type === 'create'}
+            addButton={true}
           />
         ) : (
           <SubmitFormButton
