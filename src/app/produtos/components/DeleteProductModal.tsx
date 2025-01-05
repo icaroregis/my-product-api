@@ -1,3 +1,5 @@
+'use client';
+
 import { Modal } from '@/components/Modal';
 import { useGetProductById } from '@/server/productsApi';
 import { DeleteProductForm } from './DeleteProductForm';
