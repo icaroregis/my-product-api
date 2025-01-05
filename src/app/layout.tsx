@@ -24,7 +24,7 @@ const ubuntu = Ubuntu({
 
 const queryClient = new QueryClient();
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-br">
       <body className={`${nunitoSans.variable} ${ubuntu.variable} font-sans`}>
