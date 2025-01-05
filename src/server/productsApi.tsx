@@ -97,3 +97,26 @@ export const useUpdateProduct = () => {
     },
   });
 };
+
+export const useDeleteProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { data } = await api.delete(`/products/${id}`);
+      return { id, data };
+    },
+    onSuccess: ({ id }) => {
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+
+      queryClient.setQueryData(['products'], (oldData: Product[] | undefined) => {
+        if (!oldData) return undefined;
+        return oldData.filter((product) => product.id !== Number(id));
+      });
+    },
+    onError: (error) => {
+      console.error('Erro ao deletar produto:', error);
+      throw error;
+    },
+  });
+};

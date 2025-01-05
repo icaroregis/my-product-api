@@ -39,8 +39,6 @@ export function CreateProductForm() {
         } else {
           reset();
         }
-      } else {
-        toast.error('Erro ao criar produto');
       }
     } catch (error) {
       console.error('Erro ao criar produto:', error);

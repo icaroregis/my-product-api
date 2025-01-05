@@ -34,7 +34,7 @@ export function UpdateProductForm({ data }: Readonly<UpdateProductFormProps>) {
   async function handleSubmitFunction(data: UpdateProductFormData) {
     try {
       const newPrice = formatarValor(data.preco);
-      const response = await updateProduct.mutateAsync({
+      await updateProduct.mutateAsync({
         id: data.id,
         data: {
           nome: data.nome,
@@ -42,15 +42,8 @@ export function UpdateProductForm({ data }: Readonly<UpdateProductFormProps>) {
           quantidade: data.quantidade,
         },
       });
-
-      console.log('🚀 ~ handleSubmitFunction ~ response:', response);
-
-      if (response) {
-        toast.success('Produto atualizado com sucesso');
-        push(pathname);
-      } else {
-        toast.error('Erro ao atualizar produto');
-      }
+      toast.success('Produto atualizado com sucesso');
+      push(pathname);
     } catch (error) {
       console.error('Erro ao atualizar produto:', error);
     }

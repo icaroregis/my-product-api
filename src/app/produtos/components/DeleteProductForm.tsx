@@ -2,9 +2,11 @@
 
 import { CancelFormButton } from '@/components/Buttons/CancelFormButton';
 import { SubmitFormButton } from '@/components/Buttons/SubmitFormButton';
+import { useDeleteProduct } from '@/server/productsApi';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { DeleteProductFormData, DeleteProductSchema } from '../specifications/product.schema';
 
 type DeleteProductFormProps = {
@@ -30,17 +32,25 @@ export function DeleteProductForm({ id, name }: Readonly<DeleteProductFormProps>
     push(pathname);
   };
 
-  async function handleDeleteTag(data: DeleteProductFormData) {
-    console.log(data);
+  const deleteProduct = useDeleteProduct();
+  async function handleDeleteProduct(data: DeleteProductFormData) {
+    try {
+      await deleteProduct.mutateAsync(data.id);
+      toast.success('Produto deletado com sucesso');
+      push(pathname);
+    } catch (error) {
+      toast.error('Erro ao deletar produto');
+      console.error('Erro ao deletar produto:', error);
+    }
   }
 
   return (
     <form
-      onSubmit={handleSubmit(handleDeleteTag)}
+      onSubmit={handleSubmit(handleDeleteProduct)}
       className="flex flex-col items-center justify-center gap-6">
       <div>
         <p className="text-start">
-          Você está prestes a desativar a Tag: <strong>{name}</strong>.{' '}
+          Você está prestes a desativar o Produto: <strong>{name}</strong>.{' '}
           <span className="text-start">Tem certeza disso?</span>
         </p>
       </div>
