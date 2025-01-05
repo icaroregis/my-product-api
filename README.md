@@ -6,7 +6,6 @@ Este projeto é a interface de usuário (front-end) de uma aplicação web de ge
 
 ## Features
 
-- Autenticação de usuários
 - Integração com API de back-end
 - Formulários dinâmicos com validações
 - Interface responsiva
