@@ -1,3 +1,43 @@
+# My Product App Frontend
+
+## About
+
+Este projeto é a interface de usuário (front-end) de uma aplicação web de gerenciamento de produtos. Ele foi desenvolvido utilizando [Next.js](https://nextjs.org), [PrimeReact](https://www.primefaces.org/primereact/), e outras tecnologias modernas para fornecer uma experiência de usuário rica e interativa.
+
+## Features
+
+- Autenticação de usuários
+- Integração com API de back-end
+- Formulários dinâmicos com validações
+- Interface responsiva
+- Notificações de sucesso e erro
+
+## Technologies
+
+- Next.js
+- React
+- PrimeReact
+- React Hook Form
+- Tailwind CSS
+- Axios
+- React Query
+- Zod
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm, yarn, pnpm, ou bun
+
+### Installation
+
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/seu-repositorio-front-end.git
+   cd seu-repositorio-front-end
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
