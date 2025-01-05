@@ -27,12 +27,19 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
   const [createAnother, setCreateAnother] = useState(false);
 
   const {
+    watch,
     register,
     handleSubmit,
     reset,
     control,
     formState: { isSubmitting },
   } = useFormContext<CreateProductFormData | UpdateProductFormData>();
+
+  const nome = watch('nome');
+  const preco = watch('preco');
+  const quantidade = watch('quantidade');
+
+  const isFormInvalid = !nome || !preco || !quantidade;
 
   const leaveProductForm = () => {
     push(pathname);
@@ -57,7 +64,7 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
 
   return (
     <form
-      id="tag-form"
+      id="product-form"
       onSubmit={handleSubmit(handleSubmitFormData)}>
       {type === 'update' && (
         <div className="hidden">
@@ -71,7 +78,7 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
         </div>
       )}
 
-      <div className="flex flex-col mb-4 d-none">
+      <div className="flex flex-col mb-4">
         <InputField
           label="Nome"
           control={control}
@@ -85,8 +92,8 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
           label="Preço"
           control={control}
           {...register('preco')}
-          required
           formatForCurrency
+          required
         />
       </div>
 
@@ -106,13 +113,22 @@ export function ProductForm({ handleSubmitFunction, type }: Readonly<IProductFor
           disabled={isSubmitting}
         />
 
-        <SubmitFormButton
-          handleClick={setCreateAnother}
-          classNameMain={type === 'create' ? 'flex gap-[1.5px]' : undefined}
-          variant={type === 'create' ? 'successWithMore' : 'primary'}
-          isSubmitting={isSubmitting}
-          addButton={type === 'create'}
-        />
+        {type === 'create' ? (
+          <SubmitFormButton
+            handleClick={setCreateAnother}
+            classNameMain={type === 'create' ? 'flex gap-[1.5px]' : undefined}
+            variant={type === 'create' ? 'successWithMore' : 'primary'}
+            isSubmitting={isSubmitting}
+            addButton={type === 'create'}
+          />
+        ) : (
+          <SubmitFormButton
+            handleClick={setCreateAnother}
+            variant={'primary'}
+            isSubmitting={isSubmitting}
+            disabled={isFormInvalid}
+          />
+        )}
       </div>
     </form>
   );

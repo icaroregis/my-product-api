@@ -6,19 +6,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { CreateProductFormData, CreateTagSchema } from '../specifications/product.schema';
+import { CreateProductFormData, CreateProductSchema } from '../specifications/product.schema';
 import { ProductForm } from './ProductForm';
 
 export function CreateProductForm() {
   const { push } = useRouter();
   const pathname = usePathname();
   const methods = useForm<CreateProductFormData>({
-    resolver: zodResolver(CreateTagSchema),
-    defaultValues: {
-      nome: '',
-      preco: '',
-      quantidade: '',
-    },
+    resolver: zodResolver(CreateProductSchema),
   });
 
   const createProduct = useCreateProduct();
@@ -42,6 +37,8 @@ export function CreateProductForm() {
       }
     } catch (error) {
       console.error('Erro ao criar produto:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+      toast.error(`Erro ao criar produto: ${errorMessage}`);
     }
   }
 

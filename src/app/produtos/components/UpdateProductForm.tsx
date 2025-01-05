@@ -46,6 +46,8 @@ export function UpdateProductForm({ data }: Readonly<UpdateProductFormProps>) {
       push(pathname);
     } catch (error) {
       console.error('Erro ao atualizar produto:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+      toast.error(`Erro ao atualizar produto: ${errorMessage}`);
     }
   }
 

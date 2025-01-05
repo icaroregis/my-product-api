@@ -9,11 +9,11 @@ const ProductSchema = z.object({
   quantidade: z.string({ required_error: required }),
 });
 
-export const CreateTagSchema = ProductSchema.omit({
+export const CreateProductSchema = ProductSchema.omit({
   id: true,
 });
 
-export type CreateProductFormData = z.infer<typeof CreateTagSchema>;
+export type CreateProductFormData = z.infer<typeof CreateProductSchema>;
 
 export const UpdateProductSchema = ProductSchema;
 
