@@ -4,11 +4,14 @@ import { DeleteProductModal } from './components/DeleteProductModal';
 import { ProductTable } from './components/ProductTable';
 import { UpdateProductModal } from './components/UpdateProductModal';
 
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: SearchParams;
 };
 
-export default function Page({ searchParams }: Readonly<Props>) {
+export default async function Page(props: Readonly<Props>) {
+  const searchParams = await props.searchParams;
   const createProductModal = searchParams.createProductModal === 'true';
   const updateProductModal = searchParams.updateProductModal === 'true';
   const updateProductId = searchParams.updateProductId ? String(searchParams.updateProductId) : null;
